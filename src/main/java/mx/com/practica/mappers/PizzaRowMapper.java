@@ -2,6 +2,7 @@ package mx.com.practica.mappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -11,6 +12,7 @@ import mx.com.practica.modelos.Tamano;
 
 public class PizzaRowMapper implements RowMapper<Pizza>{
 	
+	private static final Logger LOGGER = Logger.getLogger("mx.com.practica.mappers");
 	
 	public Pizza mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
@@ -22,11 +24,16 @@ public class PizzaRowMapper implements RowMapper<Pizza>{
 			pizza.setPrecio(rs.getInt(3));
 			pizza.setTamano(Tamano.valueOf(rs.getString(4)));
 			
-			System.out.println(pizza.toString());
+			LOGGER.info(pizza.toString());
 				
-		}catch(SQLException e) {
-			System.out.println(e);
+		}catch(IllegalArgumentException e) {
+			
+			LOGGER.info("ERROR - INCONSISTENCIAS EN LOS DATOS DE ESTA PIZZA");
+			
+			pizza = new Pizza(Sabor.indefinido, 0, Tamano.indefinido, rowNum+1);
 		}
+		
+		LOGGER.info("ok - " + pizza);
 		
 		return pizza;
 	}

@@ -4,6 +4,7 @@ public enum Tamano {
 	
 	chica,
 	mediana,
-	grande;
+	grande,
+	indefinido;
 
 }

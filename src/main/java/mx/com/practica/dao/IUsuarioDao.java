@@ -9,13 +9,8 @@ import mx.com.practica.modelos.Tamano;
 
 public interface IUsuarioDao {
 	
-	/*
-	default List<Pizza> getAllPizzas(){
-		List<Pizza> todasPizzas = new ArrayList<>();
-		todasPizzas.add(new Pizza(Sabor.hawayana, 90, Tamano.grande));
-		return todasPizzas;
-	}*/
-	
 	public List<Pizza> getAllPizzas();
+	
+	public int insertPizza(Pizza pizza);
 
 }

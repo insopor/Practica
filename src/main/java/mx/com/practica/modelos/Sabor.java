@@ -4,6 +4,7 @@ public enum Sabor {
 
 	hawayana,
 	mexicana,
-	peperoni;
+	peperoni,
+	indefinido;
 	
 }

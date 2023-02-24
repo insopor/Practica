@@ -25,4 +25,20 @@ public class UsuarioDao implements IUsuarioDao{
 
 	}
 	
+	public int insertPizza(Pizza pizza) {
+		
+		String query = 
+				" INSERT INTO CATAPIZZA "
+				+ " ( FCSABOR, FNPRECIO, FCTAMANO) "
+				+ " VALUES "
+				+ " (?,?,?) ";
+		
+		return jdbcTemplate.update(
+				query
+				,pizza.getSabor().toString()
+				,pizza.getPrecio()
+				,pizza.getTamano().toString()
+				);
+	};
+	
 }

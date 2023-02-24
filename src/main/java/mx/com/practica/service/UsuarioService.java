@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import mx.com.practica.dao.UsuarioDao;
 import mx.com.practica.modelos.Pizza;
+import mx.com.practica.modelos.Response;
 
 
 @Service
@@ -26,10 +27,34 @@ public class UsuarioService implements IUsuarioService{
 	}
 	
 	@Override
-	public List<Pizza> getAllPizzas() {
-		// TODO Auto-generated method stub
+	public Response<List<Pizza>> getAllPizzas() {
 		
-		return ud.getAllPizzas();
+		Response<List<Pizza>> r = new Response<List<Pizza>>();
+		r.setCodError(0);
+		r.setMensaje("Se consultaron todas las pizzas");
+		r.setRespuesta(ud.getAllPizzas());
+		
+		return r;
+	}
+	
+	public Response<Integer> insertPizzasDao(Pizza pizza) {
+		
+		Integer respuesta = ud.insertPizza(pizza);
+		
+		Response<Integer> r = new Response<Integer>();
+		
+		if(respuesta == 0) {
+			r.setCodError(0);
+			r.setMensaje("La pizza se inserto correctamente");
+			r.setRespuesta(respuesta);
+		}else {
+			r.setCodError(1);
+			r.setMensaje("La pizza no se inserto correctamente");
+			r.setRespuesta(respuesta);
+		}
+		
+		
+		return r;
 	}
 
 }

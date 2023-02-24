@@ -1,12 +1,10 @@
 package mx.com.practica.restcontroller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.com.practica.modelos.Pizza;
+import mx.com.practica.modelos.Response;
 import mx.com.practica.modelos.Result;
 import mx.com.practica.modelos.Sabor;
 import mx.com.practica.service.UsuarioService;
@@ -99,13 +98,15 @@ public class UsuarioRestController {
 	}
 	
 	@GetMapping("/getPizzasDao")
-	public List<Pizza> getPizzasDao() {
-		
+	public Response<List<Pizza>>  getPizzasDao() {
 		
 		return us.getAllPizzas();
-		
 	}
 	
+	@PostMapping("/insertPizzasDao")
+	public Response<Integer>  insertPizzasDao(@RequestBody Pizza pizza) {
+		return us.insertPizzasDao(pizza);
+	}
 	
 	public Result resultado(Result result) {
 		
